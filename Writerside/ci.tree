@@ -7,5 +7,6 @@
 
     <toc-element topic="distribution.md"/>
     <toc-element topic="Caffeine.md"/>
+    <toc-element topic="network.md"/>
     <toc-element topic="Kafka.md"/>
 </instance-profile>

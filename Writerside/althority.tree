@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE instance-profile
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
+
+<instance-profile id="althority"
+                 name="算法集锦"
+                 start-page="">
+
+    <toc-element topic="UnionFind.md"/>
+    <toc-element topic="sliding-window.md"/>
+    <toc-element topic="BFS.md"/>
+    <toc-element topic="dyn.md"/>
+    <toc-element topic="backtrack.md"/>
+</instance-profile>
