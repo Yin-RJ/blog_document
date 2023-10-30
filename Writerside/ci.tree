@@ -5,6 +5,7 @@
 <instance-profile id="ci" name="Content Instance"
                   start-page="">
 
+    <toc-element topic="Mysql.md"/>
     <toc-element topic="distribution.md"/>
     <toc-element topic="Java.md">
         <toc-element topic="generics.md"/>
