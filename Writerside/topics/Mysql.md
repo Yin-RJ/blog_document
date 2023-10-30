@@ -56,6 +56,24 @@ log中，此时算是更新完成。后续再由后台线程将脏页的数据�
 
 ![redo_log.png](mysql_redo_log.png)
 
+作用：
+1. 实现事务的持久性，让Mysql具有crash-safe的能力，能够保证Mysql奔溃之后，重启之后数据不丢失
+2. 将随机写变成顺序写，提高写磁盘IO的效率（redo 
+   log是追加写，所以每次是顺序写入磁盘，而脏页数据写回磁盘需要先找到数据的位置，然后再进行写入，所以是随机写，顺序写的效率大于随机写）
+
+redo log也存在一个redo log buffer，而redo log 
+buffer（默认16MB）也是在内存中的，所以也是先写入到内存，在以下情况下会将buffer中的内容刷新到磁盘中：
+- Mysql正常关闭时
+- 当redo log buffer中的使用量大于其一半，会触发落盘操作
+- InnoDB的后台线程，每隔1秒将redo log buffer中的内容写入磁盘
+- 每次事务提交的时候都将redo log buffer中的数据写入到磁盘（由`innodb_flush_log_at_trx_commit`参数控制）
+
+> `innodb_flush_log_at_trx_commit`参数：
+> 
+> 1. 取值为0，每次事务提交后，不会主动触发刷盘操作
+> 2. 取值为1，每次事务提交后，将buffer中的内容直接写入磁盘
+> 3. 取值为2，每次事务提交后，将buffer中的内容写入到Page Cache，然后依靠InnoDB每隔一秒执行的写入磁盘线程将数据从Page 
+     > Cache写入到磁盘中
 
 
 ### 归档日志(binlog)
